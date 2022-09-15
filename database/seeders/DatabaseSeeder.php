@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Domain\Attribute\Attribute;
+use App\Domain\Attribute\AttributeValue;
 use App\Domain\Cart\Actions\AddCartItem;
 use App\Domain\Cart\Actions\InitializeCart;
 use App\Domain\Coupon\Coupon;
@@ -9,6 +11,7 @@ use App\Domain\Customer\Customer;
 use App\Domain\Product\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Ramsey\Collection\Collection;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,5 +43,10 @@ class DatabaseSeeder extends Seeder
         (new AddCartItem)($cart, $products->random(1)[0], 1);
         (new AddCartItem)($cart, $products->random(1)[0], 1);
         (new AddCartItem)($cart, $products->random(1)[0], 1);
+
+
+//        $this->call([
+//            AttributeProductSeeder::class
+//        ]);
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Domain\Product;
 
+use App\Domain\Attribute\AttributeValue;
 use App\Domain\Inventory\Projections\Inventory;
+use App\Domain\Product\Relations\AttributeProduct;
 use Database\Factories\ProductFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model
@@ -51,5 +54,15 @@ class Product extends Model
     public function hasAvailableInventory(int $requestedAmount): bool
     {
         return $this->inventory->amount >= $requestedAmount;
+    }
+
+    public function attributes(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            AttributeValue::class,
+            'category_course',
+            'product_id',
+            'value_id'
+        )->using(AttributeProduct::class);
     }
 }
