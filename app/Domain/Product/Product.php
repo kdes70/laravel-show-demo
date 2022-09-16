@@ -60,7 +60,7 @@ class Product extends Model
     {
         return $this->belongsToMany(
             AttributeValue::class,
-            'category_course',
+            'attribute_products',
             'product_id',
             'value_id'
         )->using(AttributeProduct::class);

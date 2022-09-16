@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Domain\Customer\Customer;
+use App\Domain\Product\Search\EloquentSearch;
+use App\Domain\Product\Search\SearchContract;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->registerWebBindings();
+
+        $this->app->singleton(SearchContract::class, function () {
+            return new EloquentSearch();
+        });
     }
 
     private function registerWebBindings(): void
